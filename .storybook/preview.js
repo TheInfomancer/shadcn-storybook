@@ -29,6 +29,20 @@ export const globalTypes = {
       dynamicTitle: true,
     },
   },
+  darkMode: {
+    name: 'Dark Mode',
+    description: 'Light or dark color scheme',
+    defaultValue: 'light',
+    toolbar: {
+      icon: 'moon',
+      items: [
+        { value: 'light', title: 'Light', icon: 'sun' },
+        { value: 'dark',  title: 'Dark',  icon: 'moon' },
+      ],
+      showName: true,
+      dynamicTitle: true,
+    },
+  },
 };
 
 // ── Theme decorator ────────────────────────────────────────────────────────
@@ -37,14 +51,16 @@ export const globalTypes = {
 
 export const decorators = [
   (Story, context) => {
-    const themeName = context.globals.theme ?? 'zinc';
-    const radiusKey = context.globals.radius ?? 'default';
-    const theme     = colorThemes[themeName] ?? colorThemes.zinc;
+    const themeName = context.globals.theme    ?? 'zinc';
+    const radiusKey = context.globals.radius   ?? 'default';
+    const darkMode  = context.globals.darkMode ?? 'light';
+    const theme     = colorThemes[themeName]   ?? colorThemes.zinc;
     const radius    = radiusPresets[radiusKey] ?? '0.625rem';
 
     const root = document.documentElement;
     Object.entries(theme.vars).forEach(([key, value]) => root.style.setProperty(key, value));
     root.style.setProperty('--radius', radius);
+    root.classList.toggle('dark', darkMode === 'dark');
 
     return Story();
   },
@@ -64,6 +80,9 @@ const preview = {
     options: {
       storySort: {
         order: [
+          'Foundation', [
+            'Themes', 'Colours', 'Typography', 'Spacing & Grid', 'Icons', 'Shadows & Blurs',
+          ],
           'Atoms', [
             'Button', 'Badge', 'Avatar', 'Input', 'Textarea', 'Label',
             'Checkbox', 'Switch', 'Radio Group', 'Select', 'Native Select',
