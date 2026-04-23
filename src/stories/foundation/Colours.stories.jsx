@@ -56,10 +56,10 @@ function SwatchCard({ label, bg, fg, mono }) {
       {/* Swatch */}
       <div
         className="h-20 w-full flex items-end p-3"
-        style={{ background: `hsl(${bgVal})`, color: `hsl(${fgVal})` }}
+        style={{ background: bgVal, color: fgVal }}
       >
         {mono && (
-          <div className="w-full h-3 rounded-full" style={{ background: `hsl(${fgVal})`, opacity: 0.25 }} />
+          <div className="w-full h-3 rounded-full" style={{ background: fgVal, opacity: 0.25 }} />
         )}
       </div>
       {/* Info */}
@@ -98,8 +98,8 @@ export const Overview = {
         <h1 className="text-4xl font-bold tracking-tight text-foreground">Colours</h1>
         <p className="text-muted-foreground max-w-xl mt-2">
           Semantic colour tokens that adapt to the active theme and dark mode.
-          All values are raw HSL channels consumed by Tailwind as{' '}
-          <code className="text-xs font-mono bg-muted px-1 py-0.5 rounded">hsl(var(--token))</code>.
+          All values are OKLCH colours consumed by Tailwind via{' '}
+          <code className="text-xs font-mono bg-muted px-1 py-0.5 rounded">var(--token)</code>.
         </p>
       </div>
 
