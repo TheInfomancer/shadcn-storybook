@@ -5,28 +5,35 @@ export default {
   parameters: { layout: 'fullscreen' },
 };
 
+// Brand tokens to show per card (subset of the full var set)
+const BRAND_TOKENS = [
+  '--primary',
+  '--secondary',
+  '--accent',
+  '--muted',
+  '--border',
+  '--ring',
+];
+
 const TOKEN_LABELS = {
-  '--primary':              'Primary',
-  '--primary-foreground':   'Primary FG',
-  '--secondary':            'Secondary',
-  '--secondary-foreground': 'Secondary FG',
-  '--accent':               'Accent',
-  '--accent-foreground':    'Accent FG',
-  '--ring':                 'Ring',
+  '--primary':   'Primary',
+  '--secondary': 'Secondary',
+  '--accent':    'Accent',
+  '--muted':     'Muted',
+  '--border':    'Border',
+  '--ring':      'Ring',
 };
 
 function ThemeCard({ themeKey, theme }) {
-  const primary = theme.vars['--primary'];
-  const secondary = theme.vars['--secondary'];
-  const accent = theme.vars['--accent'];
+  const light = theme.light;
 
   return (
     <div className="rounded-2xl border border-border bg-card overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200">
-      {/* Colour bar */}
+      {/* Colour bar — primary / secondary / accent */}
       <div className="flex h-12">
-        <div className="flex-1" style={{ background: `hsl(${primary})` }} />
-        <div className="flex-1" style={{ background: `hsl(${secondary})` }} />
-        <div className="flex-1" style={{ background: `hsl(${accent})` }} />
+        <div className="flex-1" style={{ background: light['--primary'] }} />
+        <div className="flex-1" style={{ background: light['--secondary'] }} />
+        <div className="flex-1" style={{ background: light['--accent'] }} />
       </div>
 
       <div className="p-5 space-y-4">
@@ -38,16 +45,24 @@ function ThemeCard({ themeKey, theme }) {
 
         {/* Token list */}
         <div className="space-y-2">
-          {Object.entries(theme.vars).map(([token, value]) => (
-            <div key={token} className="flex items-center gap-2.5">
-              <div
-                className="w-5 h-5 rounded-full border border-border shrink-0 shadow-sm"
-                style={{ background: `hsl(${value})` }}
-              />
-              <span className="text-xs font-mono text-muted-foreground flex-1 truncate">{TOKEN_LABELS[token] ?? token}</span>
-              <span className="text-xs font-mono text-muted-foreground/60 truncate max-w-[120px]">{value}</span>
-            </div>
-          ))}
+          {BRAND_TOKENS.map((token) => {
+            const value = light[token];
+            if (!value) return null;
+            return (
+              <div key={token} className="flex items-center gap-2.5">
+                <div
+                  className="w-5 h-5 rounded-full border border-border shrink-0 shadow-sm"
+                  style={{ background: value }}
+                />
+                <span className="text-xs font-mono text-muted-foreground flex-1 truncate">
+                  {TOKEN_LABELS[token] ?? token}
+                </span>
+                <span className="text-xs font-mono text-muted-foreground/60 truncate max-w-[140px]">
+                  {value}
+                </span>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
@@ -72,9 +87,12 @@ export const Overview = {
       <div className="rounded-xl border border-border bg-muted/40 p-5 space-y-2 max-w-2xl">
         <p className="text-sm font-semibold text-foreground">How it works</p>
         <p className="text-sm text-muted-foreground">
-          Each theme writes HSL channel values to <code className="font-mono text-xs bg-muted px-1 py-0.5 rounded">document.documentElement</code> via{' '}
-          <code className="font-mono text-xs bg-muted px-1 py-0.5 rounded">style.setProperty</code>. Tailwind wraps them in{' '}
-          <code className="font-mono text-xs bg-muted px-1 py-0.5 rounded">hsl()</code>, so every component reacts instantly without a page reload.
+          Each theme stores both light and dark OKLCH values. The toolbar decorator applies the
+          correct set to{' '}
+          <code className="font-mono text-xs bg-muted px-1 py-0.5 rounded">document.documentElement</code>{' '}
+          via{' '}
+          <code className="font-mono text-xs bg-muted px-1 py-0.5 rounded">style.setProperty</code>,
+          so every component reacts instantly without a page reload.
         </p>
       </div>
 
