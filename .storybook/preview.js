@@ -99,7 +99,7 @@ const preview = {
             'Dialog', 'Alert Dialog', 'Sheet', 'Drawer', 'Tabs',
             'Dropdown Menu', 'Context Menu', 'Navigation Menu', 'Menubar',
             'Command', 'Combobox', 'Date Picker', 'Carousel', 'Chart',
-            'Resizable', 'Data Table',
+            'Resizable', 'Data Table', 'Sidebar',
           ],
         ],
       },

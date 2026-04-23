@@ -3,9 +3,11 @@ import { Separator } from '@/components/ui/separator';
 
 const tags = Array.from({ length: 50 }, (_, i) => `v1.${i}.0`);
 const artworks = [
-  { artist: 'Ornella Binni',  src: 'https://images.unsplash.com/photo-1465869185982-5a1a7522cbcb?w=300&dpr=2&q=80' },
-  { artist: 'Tom Byrom',      src: 'https://images.unsplash.com/photo-1548516173-3cabfa4607e9?w=300&dpr=2&q=80' },
-  { artist: 'Vladimir Malyavko', src: 'https://images.unsplash.com/photo-1494337480532-3725c85fd2ab?w=300&dpr=2&q=80' },
+  { artist: 'Ornella Binni',     gradient: 'from-rose-400 to-pink-600'      },
+  { artist: 'Tom Byrom',         gradient: 'from-sky-400 to-indigo-600'     },
+  { artist: 'Vladimir Malyavko', gradient: 'from-emerald-400 to-teal-600'   },
+  { artist: 'Helena Hertz',      gradient: 'from-amber-400 to-orange-600'   },
+  { artist: 'Lucrezia Carnelos', gradient: 'from-violet-400 to-purple-600'  },
 ];
 
 export default {
@@ -34,11 +36,9 @@ export const Horizontal = {
   render: () => (
     <ScrollArea className="w-96 whitespace-nowrap rounded-md border">
       <div className="flex w-max gap-4 p-4">
-        {artworks.map(({ artist, src }) => (
+        {artworks.map(({ artist, gradient }) => (
           <figure key={artist} className="shrink-0">
-            <div className="overflow-hidden rounded-md">
-              <img src={src} alt={artist} className="aspect-[3/4] h-fit w-[150px] object-cover" />
-            </div>
+            <div className={`aspect-[3/4] w-[150px] rounded-md bg-gradient-to-br ${gradient}`} />
             <figcaption className="pt-2 text-xs text-muted-foreground">{artist}</figcaption>
           </figure>
         ))}

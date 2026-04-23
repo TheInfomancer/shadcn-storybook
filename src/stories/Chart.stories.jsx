@@ -12,7 +12,7 @@ const monthlyData = [
 
 const chartConfig = {
   desktop: { label: 'Desktop', color: 'hsl(var(--primary))' },
-  mobile:  { label: 'Mobile',  color: 'hsl(var(--secondary-foreground) / 0.4)' },
+  mobile:  { label: 'Mobile',  color: 'hsl(var(--muted-foreground))' },
 };
 
 export default {
@@ -83,8 +83,8 @@ export const PieChartStory = {
     const COLORS = [
       'hsl(var(--primary))',
       'hsl(var(--muted-foreground))',
-      'hsl(var(--primary) / 0.5)',
-      'hsl(var(--primary) / 0.25)',
+      'hsl(var(--secondary-foreground))',
+      'hsl(var(--border))',
     ];
     return (
       <ChartContainer config={{}} className="h-64 w-64">

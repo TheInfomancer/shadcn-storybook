@@ -18,7 +18,6 @@ export const Default = {
       <HoverCardContent className="w-80">
         <div className="flex justify-between gap-4">
           <Avatar>
-            <AvatarImage src="https://github.com/shadcn.png" />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
           <div className="space-y-1">

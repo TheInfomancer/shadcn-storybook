@@ -1,4 +1,4 @@
-import { ItemGroup, Item, ItemLabel, ItemDescription, ItemSeparator } from '@/components/ui/item';
+import { ItemGroup, Item, ItemTitle as ItemLabel, ItemDescription, ItemSeparator } from '@/components/ui/item';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { BellIcon, ShieldIcon, CreditCardIcon, UserIcon } from 'lucide-react';

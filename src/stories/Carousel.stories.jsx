@@ -57,13 +57,13 @@ export const ImageCarousel = {
     <Carousel className="w-full max-w-md">
       <CarouselContent>
         {[
-          'https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&q=80',
-          'https://images.unsplash.com/photo-1465869185982-5a1a7522cbcb?w=800&q=80',
-          'https://images.unsplash.com/photo-1548516173-3cabfa4607e9?w=800&q=80',
-        ].map((src, i) => (
+          { label: 'Mountains',   gradient: 'from-sky-400 via-blue-500 to-indigo-600'     },
+          { label: 'Sunset',      gradient: 'from-orange-400 via-rose-500 to-pink-600'    },
+          { label: 'Forest',      gradient: 'from-emerald-400 via-teal-500 to-green-700'  },
+        ].map(({ label, gradient }, i) => (
           <CarouselItem key={i}>
-            <div className="overflow-hidden rounded-lg">
-              <img src={src} alt={`Slide ${i + 1}`} className="aspect-video w-full object-cover" />
+            <div className={`aspect-video w-full rounded-lg bg-gradient-to-br ${gradient} flex items-end p-4`}>
+              <span className="text-sm font-semibold text-white/90 drop-shadow">{label}</span>
             </div>
           </CarouselItem>
         ))}

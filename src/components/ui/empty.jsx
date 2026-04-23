@@ -85,6 +85,31 @@ function EmptyDescription({
   );
 }
 
+function EmptyActions({
+  className,
+  ...props
+}) {
+  return (
+    <div
+      data-slot="empty-actions"
+      className={cn("flex flex-wrap items-center justify-center gap-2", className)}
+      {...props} />
+  );
+}
+
+// Convenience alias for a single action — just passes through to a child
+function EmptyAction({
+  className,
+  ...props
+}) {
+  return (
+    <div
+      data-slot="empty-action"
+      className={cn(className)}
+      {...props} />
+  );
+}
+
 function EmptyContent({
   className,
   ...props
@@ -107,4 +132,7 @@ export {
   EmptyDescription,
   EmptyContent,
   EmptyMedia,
+  EmptyActions,
+  EmptyAction,
 }
+
