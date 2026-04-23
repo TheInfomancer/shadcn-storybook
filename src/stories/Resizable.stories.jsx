@@ -7,15 +7,19 @@ export default {
 
 export const Horizontal = {
   render: () => (
-    <ResizablePanelGroup direction="horizontal" className="max-w-md rounded-lg border">
+    <ResizablePanelGroup
+      orientation="horizontal"
+      className="rounded-lg border"
+      style={{ width: '500px', height: '144px' }}
+    >
       <ResizablePanel defaultSize={50}>
-        <div className="flex h-36 items-center justify-center p-6">
+        <div className="flex h-full items-center justify-center p-6">
           <span className="text-sm font-medium">Left panel</span>
         </div>
       </ResizablePanel>
       <ResizableHandle />
       <ResizablePanel defaultSize={50}>
-        <div className="flex h-36 items-center justify-center p-6">
+        <div className="flex h-full items-center justify-center p-6">
           <span className="text-sm font-medium">Right panel</span>
         </div>
       </ResizablePanel>
@@ -25,7 +29,11 @@ export const Horizontal = {
 
 export const Vertical = {
   render: () => (
-    <ResizablePanelGroup direction="vertical" className="max-h-[300px] max-w-md rounded-lg border">
+    <ResizablePanelGroup
+      orientation="vertical"
+      className="rounded-lg border"
+      style={{ width: '400px', height: '300px' }}
+    >
       <ResizablePanel defaultSize={25}>
         <div className="flex h-full items-center justify-center p-4">
           <span className="text-sm font-medium">Header</span>
@@ -44,22 +52,26 @@ export const Vertical = {
 export const ThreePanels = {
   name: 'Three Panels (IDE Layout)',
   render: () => (
-    <ResizablePanelGroup direction="horizontal" className="max-w-xl rounded-lg border min-h-48">
-      <ResizablePanel defaultSize={20} minSize={15}>
+    <ResizablePanelGroup
+      orientation="horizontal"
+      className="rounded-lg border"
+      style={{ width: '640px', height: '420px' }}
+    >
+      <ResizablePanel defaultSize={20} minSize={12}>
         <div className="flex h-full items-center justify-center p-4">
           <span className="text-xs font-medium text-muted-foreground">Sidebar</span>
         </div>
       </ResizablePanel>
       <ResizableHandle withHandle />
       <ResizablePanel defaultSize={60}>
-        <ResizablePanelGroup direction="vertical">
+        <ResizablePanelGroup orientation="vertical" style={{ height: '100%' }}>
           <ResizablePanel defaultSize={70}>
             <div className="flex h-full items-center justify-center p-4">
               <span className="text-xs font-medium text-muted-foreground">Editor</span>
             </div>
           </ResizablePanel>
           <ResizableHandle withHandle />
-          <ResizablePanel defaultSize={30}>
+          <ResizablePanel defaultSize={30} minSize={15}>
             <div className="flex h-full items-center justify-center p-4">
               <span className="text-xs font-medium text-muted-foreground">Terminal</span>
             </div>
@@ -67,7 +79,7 @@ export const ThreePanels = {
         </ResizablePanelGroup>
       </ResizablePanel>
       <ResizableHandle withHandle />
-      <ResizablePanel defaultSize={20} minSize={15}>
+      <ResizablePanel defaultSize={20} minSize={12}>
         <div className="flex h-full items-center justify-center p-4">
           <span className="text-xs font-medium text-muted-foreground">Outline</span>
         </div>

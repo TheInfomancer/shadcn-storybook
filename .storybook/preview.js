@@ -1,6 +1,78 @@
 import '../src/index.css';
 import { colorThemes, radiusPresets } from '../src/themes/themes';
 
+// ── Font family options ────────────────────────────────────────────────────
+
+const FONT_OPTIONS = [
+  { value: 'sans',  title: 'Sans',  family: "'Geist Variable', ui-sans-serif, system-ui, sans-serif" },
+  { value: 'mono',  title: 'Mono',  family: 'ui-monospace, monospace' },
+  { value: 'serif', title: 'Serif', family: 'ui-serif, Georgia, serif' },
+];
+
+// ── Type scale — sets font-size on <html>, scaling all rem values ──────────
+
+const TYPE_SCALE_OPTIONS = [
+  { value: 'xs',   title: 'XS — 12px', fontSize: '12px' },
+  { value: 'sm',   title: 'SM — 14px', fontSize: '14px' },
+  { value: 'base', title: 'Base — 16px', fontSize: '16px' },
+  { value: 'lg',   title: 'LG — 18px', fontSize: '18px' },
+  { value: 'xl',   title: 'XL — 20px', fontSize: '20px' },
+];
+
+// ── Font weight — shifts the Tailwind v4 --font-weight-* CSS variables ─────
+// Tailwind v4 generates: .font-bold { font-weight: var(--font-weight-bold) }
+// so overriding these variables changes every component that uses font-* utilities.
+
+const WEIGHT_OPTIONS = [
+  {
+    value: 'light', title: 'Light',
+    vars: {
+      '--font-weight-thin': '100', '--font-weight-extralight': '200',
+      '--font-weight-light': '200', '--font-weight-normal': '300',
+      '--font-weight-medium': '400', '--font-weight-semibold': '500',
+      '--font-weight-bold': '600', '--font-weight-extrabold': '700', '--font-weight-black': '800',
+    },
+  },
+  { value: 'regular', title: 'Regular', vars: {} }, // Tailwind defaults
+  {
+    value: 'medium', title: 'Medium',
+    vars: {
+      '--font-weight-normal': '500', '--font-weight-medium': '600',
+      '--font-weight-semibold': '700', '--font-weight-bold': '800', '--font-weight-extrabold': '900',
+    },
+  },
+  {
+    value: 'bold', title: 'Bold',
+    vars: {
+      '--font-weight-light': '400', '--font-weight-normal': '600',
+      '--font-weight-medium': '700', '--font-weight-semibold': '800',
+      '--font-weight-bold': '900', '--font-weight-extrabold': '900',
+    },
+  },
+];
+
+// ── Letter spacing — shifts the Tailwind v4 --tracking-* CSS variables ─────
+
+const TRACKING_OPTIONS = [
+  {
+    value: 'tight', title: 'Tight',
+    vars: {
+      '--tracking-tighter': '-0.075em', '--tracking-tight': '-0.05em',
+      '--tracking-normal': '-0.025em', '--tracking-wide': '0',
+      '--tracking-wider': '0.025em', '--tracking-widest': '0.05em',
+    },
+  },
+  { value: 'normal', title: 'Normal', vars: {} }, // Tailwind defaults
+  {
+    value: 'wide', title: 'Wide',
+    vars: {
+      '--tracking-tighter': '-0.025em', '--tracking-tight': '0',
+      '--tracking-normal': '0.025em', '--tracking-wide': '0.05em',
+      '--tracking-wider': '0.1em', '--tracking-widest': '0.15em',
+    },
+  },
+];
+
 // ── Global toolbar controls ────────────────────────────────────────────────
 
 export const globalTypes = {
@@ -43,36 +115,99 @@ export const globalTypes = {
       dynamicTitle: true,
     },
   },
+  font: {
+    name: 'Font',
+    description: 'Base font family',
+    defaultValue: 'sans',
+    toolbar: {
+      icon: 'paragraph',
+      items: FONT_OPTIONS.map(({ value, title }) => ({ value, title })),
+      showName: true,
+      dynamicTitle: true,
+    },
+  },
+  typeScale: {
+    name: 'Scale',
+    description: 'Base font size — scales all rem values',
+    defaultValue: 'base',
+    toolbar: {
+      icon: 'zoom',
+      items: TYPE_SCALE_OPTIONS.map(({ value, title }) => ({ value, title })),
+      showName: true,
+      dynamicTitle: true,
+    },
+  },
+  fontWeight: {
+    name: 'Weight',
+    description: 'Shift all font-weight utilities up or down',
+    defaultValue: 'regular',
+    toolbar: {
+      icon: 'bold',
+      items: WEIGHT_OPTIONS.map(({ value, title }) => ({ value, title })),
+      showName: true,
+      dynamicTitle: true,
+    },
+  },
+  letterSpacing: {
+    name: 'Tracking',
+    description: 'Shift all tracking utilities tighter or wider',
+    defaultValue: 'normal',
+    toolbar: {
+      icon: 'ruler',
+      items: TRACKING_OPTIONS.map(({ value, title }) => ({ value, title })),
+      showName: true,
+      dynamicTitle: true,
+    },
+  },
 };
 
 // ── Theme decorator ────────────────────────────────────────────────────────
-// Applies the full light or dark var set for the selected theme as inline
-// styles on <html>. We clear the previous set first so stale values never
-// linger when switching themes or modes.
 
 let _appliedVarKeys = [];
 
 export const decorators = [
   (Story, context) => {
-    const themeName = context.globals.theme    ?? 'neutral';
-    const radiusKey = context.globals.radius   ?? 'default';
-    const darkMode  = context.globals.darkMode ?? 'light';
-    const theme     = colorThemes[themeName]   ?? colorThemes.neutral;
-    const radius    = radiusPresets[radiusKey] ?? '0.625rem';
-    const vars      = darkMode === 'dark' ? theme.dark : theme.light;
+    const { theme: themeName = 'neutral',
+            radius: radiusKey = 'default', darkMode = 'light',
+            font: fontKey = 'sans', typeScale: scaleKey = 'base',
+            fontWeight: weightKey = 'regular', letterSpacing: trackingKey = 'normal' } = context.globals;
+
+    const theme      = colorThemes[themeName] ?? colorThemes.neutral;
+    const radius     = radiusPresets[radiusKey] ?? '0.625rem';
+    const vars       = darkMode === 'dark' ? theme.dark : theme.light;
+    const fontFamily = FONT_OPTIONS.find(f => f.value === fontKey)?.family ?? FONT_OPTIONS[0].family;
+    const fontSize   = TYPE_SCALE_OPTIONS.find(f => f.value === scaleKey)?.fontSize ?? '16px';
+    const weightVars = WEIGHT_OPTIONS.find(w => w.value === weightKey)?.vars ?? {};
+    const trackVars  = TRACKING_OPTIONS.find(t => t.value === trackingKey)?.vars ?? {};
 
     const root = document.documentElement;
 
-    // Clear previously applied inline vars to avoid stale overrides
+    // Clear previously applied vars
     _appliedVarKeys.forEach(key => root.style.removeProperty(key));
 
-    // Apply current theme + mode vars
-    Object.entries(vars).forEach(([key, value]) => root.style.setProperty(key, value));
+    // Apply theme color vars
+    Object.entries(vars).forEach(([k, v]) => root.style.setProperty(k, v));
+    // Apply radius
     root.style.setProperty('--radius', radius);
-    _appliedVarKeys = [...Object.keys(vars), '--radius'];
+    // Apply Tailwind v4 font-weight vars
+    Object.entries(weightVars).forEach(([k, v]) => root.style.setProperty(k, v));
+    // Apply Tailwind v4 tracking vars
+    Object.entries(trackVars).forEach(([k, v]) => root.style.setProperty(k, v));
 
-    // Keep .dark class for Tailwind dark: utility variants
+    _appliedVarKeys = [
+      ...Object.keys(vars),
+      '--radius',
+      ...Object.keys(weightVars), ...Object.keys(trackVars),
+    ];
+
+    // Dark mode class
     root.classList.toggle('dark', darkMode === 'dark');
+
+    // Font family: must go on body (index.css sets font-family on body explicitly)
+    document.body.style.fontFamily = fontFamily;
+
+    // Type scale: set font-size on <html> — scales all rem-based utilities
+    root.style.fontSize = fontSize;
 
     return Story();
   },
