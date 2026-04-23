@@ -97,9 +97,7 @@ export const Overview = {
         <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Foundation</p>
         <h1 className="text-4xl font-bold tracking-tight text-foreground">Colours</h1>
         <p className="text-muted-foreground max-w-xl mt-2">
-          Semantic colour tokens that adapt to the active theme and dark mode.
-          All values are OKLCH colours consumed by Tailwind via{' '}
-          <code className="text-xs font-mono bg-muted px-1 py-0.5 rounded">var(--token)</code>.
+          Colour tokens used across components. They adapt automatically to the active theme and dark mode.
         </p>
       </div>
 

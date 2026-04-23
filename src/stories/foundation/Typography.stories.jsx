@@ -135,8 +135,8 @@ export const Overview = {
             teams can move faster while maintaining visual coherence.
           </p>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            The shadcn/ui component library, combined with Tailwind CSS, offers a practical foundation
-            for building design systems that are both flexible and maintainable.
+            Good components are predictable, accessible, and easy to extend — so designers and
+            developers can focus on building great products instead of reinventing the wheel.
           </p>
         </div>
       </section>

@@ -25,7 +25,7 @@ export const Default = {
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="d-name" className="text-right">Name</Label>
-            <Input id="d-name" defaultValue="Danny Levoshko" className="col-span-3" />
+            <Input id="d-name" defaultValue="John Doe" className="col-span-3" />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="d-user" className="text-right">Username</Label>

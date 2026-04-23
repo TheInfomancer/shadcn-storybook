@@ -78,21 +78,7 @@ export const Overview = {
         <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Foundation</p>
         <h1 className="text-4xl font-bold tracking-tight text-foreground">Themes</h1>
         <p className="text-muted-foreground max-w-xl mt-2">
-          Color themes override the semantic CSS custom properties used by every shadcn/ui component.
-          Switch themes live using the <strong className="text-foreground">Theme</strong> toolbar control above.
-        </p>
-      </div>
-
-      {/* How it works */}
-      <div className="rounded-xl border border-border bg-muted/40 p-5 space-y-2 max-w-2xl">
-        <p className="text-sm font-semibold text-foreground">How it works</p>
-        <p className="text-sm text-muted-foreground">
-          Each theme stores both light and dark OKLCH values. The toolbar decorator applies the
-          correct set to{' '}
-          <code className="font-mono text-xs bg-muted px-1 py-0.5 rounded">document.documentElement</code>{' '}
-          via{' '}
-          <code className="font-mono text-xs bg-muted px-1 py-0.5 rounded">style.setProperty</code>,
-          so every component reacts instantly without a page reload.
+          Switch between colour themes using the toolbar above. Changes apply instantly across all components.
         </p>
       </div>
 

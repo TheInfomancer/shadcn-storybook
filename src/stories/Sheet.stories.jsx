@@ -20,8 +20,8 @@ export const Default = {
         </SheetHeader>
         <div className="grid gap-4 py-4">
           {[
-            { id: 'name',  label: 'Name',     value: 'Danny Levoshko' },
-            { id: 'email', label: 'Email',    value: 'danny@example.com' },
+            { id: 'name',  label: 'Name',     value: 'John Doe' },
+            { id: 'email', label: 'Email',    value: 'john@example.com' },
             { id: 'role',  label: 'Role',     value: 'Designer' },
           ].map(({ id, label, value }) => (
             <div key={id} className="grid grid-cols-4 items-center gap-4">

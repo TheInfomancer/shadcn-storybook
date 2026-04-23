@@ -26,7 +26,7 @@ export const Default = {
           <CardContent className="space-y-4">
             <div className="space-y-1.5">
               <Label htmlFor="name">Name</Label>
-              <Input id="name" defaultValue="Danny Levoshko" />
+              <Input id="name" defaultValue="John Doe" />
             </div>
             <div className="space-y-1.5">
               <Label htmlFor="username">Username</Label>
