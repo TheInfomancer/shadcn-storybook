@@ -7,7 +7,7 @@ export const globalTypes = {
   theme: {
     name: 'Theme',
     description: 'Color theme',
-    defaultValue: 'zinc',
+    defaultValue: 'neutral',
     toolbar: {
       icon: 'paintbrush',
       items: Object.entries(colorThemes).map(([value, { label }]) => ({ value, title: label })),
@@ -51,10 +51,10 @@ export const globalTypes = {
 
 export const decorators = [
   (Story, context) => {
-    const themeName = context.globals.theme    ?? 'zinc';
+    const themeName = context.globals.theme    ?? 'neutral';
     const radiusKey = context.globals.radius   ?? 'default';
     const darkMode  = context.globals.darkMode ?? 'light';
-    const theme     = colorThemes[themeName]   ?? colorThemes.zinc;
+    const theme     = colorThemes[themeName]   ?? colorThemes.neutral;
     const radius    = radiusPresets[radiusKey] ?? '0.625rem';
 
     const root = document.documentElement;

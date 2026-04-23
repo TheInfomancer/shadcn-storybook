@@ -1,100 +1,104 @@
 /**
  * shadcn/ui color theme presets for Storybook.
  *
- * Values are raw HSL channels WITHOUT the hsl() wrapper because
- * tailwind.config.js already wraps them: e.g. `hsl(var(--primary))`.
- * Setting --primary to "240 5.9% 10%" makes bg-primary render as
- * background-color: hsl(240 5.9% 10%) which is correct.
+ * Values are complete OKLCH colors because @theme inline in index.css uses
+ * `--color-primary: var(--primary)` — a direct reference with no hsl() wrapper.
+ * The decorator in preview.js writes these to document.documentElement via
+ * style.setProperty, so every component in the canvas reacts immediately.
  *
- * The decorator in preview.js writes these directly to document.documentElement
- * via style.setProperty, so every component in the canvas reacts immediately.
+ * Hue references (approximate):
+ *   0   = red/rose    50  = orange    90  = yellow
+ *   145 = green       200 = teal      260 = blue
+ *   285 = violet      330 = pink
  */
+
 export const colorThemes = {
-  zinc: {
-    label: 'Zinc (Default)',
+  neutral: {
+    label: 'Neutral (Default)',
     vars: {
-      '--primary':              '240 5.9% 10%',
-      '--primary-foreground':   '0 0% 98%',
-      '--secondary':            '240 4.8% 95.9%',
-      '--secondary-foreground': '240 5.9% 10%',
-      '--accent':               '240 4.8% 95.9%',
-      '--accent-foreground':    '240 5.9% 10%',
-      '--ring':                 '240 5.9% 10%',
+      '--primary':              'oklch(0.205 0 0)',
+      '--primary-foreground':   'oklch(0.985 0 0)',
+      '--secondary':            'oklch(0.97 0 0)',
+      '--secondary-foreground': 'oklch(0.205 0 0)',
+      '--accent':               'oklch(0.97 0 0)',
+      '--accent-foreground':    'oklch(0.205 0 0)',
+      '--ring':                 'oklch(0.708 0 0)',
     },
   },
   blue: {
     label: 'Blue',
     vars: {
-      '--primary':              '221.2 83.2% 53.3%',
-      '--primary-foreground':   '210 40% 98%',
-      '--secondary':            '210 40% 96.1%',
-      '--secondary-foreground': '222.2 47.4% 11.2%',
-      '--accent':               '210 40% 96.1%',
-      '--accent-foreground':    '222.2 47.4% 11.2%',
-      '--ring':                 '221.2 83.2% 53.3%',
+      '--primary':              'oklch(0.546 0.215 262)',
+      '--primary-foreground':   'oklch(0.97 0.01 262)',
+      '--secondary':            'oklch(0.94 0.03 262)',
+      '--secondary-foreground': 'oklch(0.2 0.05 262)',
+      '--accent':               'oklch(0.94 0.03 262)',
+      '--accent-foreground':    'oklch(0.2 0.05 262)',
+      '--ring':                 'oklch(0.546 0.215 262)',
     },
   },
   rose: {
     label: 'Rose',
     vars: {
-      '--primary':              '346.8 77.2% 49.8%',
-      '--primary-foreground':   '355.7 100% 97.3%',
-      '--secondary':            '240 4.8% 95.9%',
-      '--secondary-foreground': '240 5.9% 10%',
-      '--accent':               '346.8 77.2% 95%',
-      '--accent-foreground':    '346.8 77.2% 30%',
-      '--ring':                 '346.8 77.2% 49.8%',
+      '--primary':              'oklch(0.567 0.229 12)',
+      '--primary-foreground':   'oklch(0.97 0.01 12)',
+      '--secondary':            'oklch(0.94 0.02 12)',
+      '--secondary-foreground': 'oklch(0.2 0.05 12)',
+      '--accent':               'oklch(0.94 0.02 12)',
+      '--accent-foreground':    'oklch(0.2 0.05 12)',
+      '--ring':                 'oklch(0.567 0.229 12)',
     },
   },
   green: {
     label: 'Green',
     vars: {
-      '--primary':              '142.1 76.2% 36.3%',
-      '--primary-foreground':   '355.7 100% 97.3%',
-      '--secondary':            '240 4.8% 95.9%',
-      '--secondary-foreground': '240 5.9% 10%',
-      '--accent':               '142.1 76.2% 92%',
-      '--accent-foreground':    '142.1 76.2% 20%',
-      '--ring':                 '142.1 76.2% 36.3%',
+      '--primary':              'oklch(0.527 0.163 145)',
+      '--primary-foreground':   'oklch(0.97 0.01 145)',
+      '--secondary':            'oklch(0.93 0.04 145)',
+      '--secondary-foreground': 'oklch(0.2 0.05 145)',
+      '--accent':               'oklch(0.93 0.04 145)',
+      '--accent-foreground':    'oklch(0.2 0.05 145)',
+      '--ring':                 'oklch(0.527 0.163 145)',
     },
   },
   orange: {
     label: 'Orange',
     vars: {
-      '--primary':              '24.6 95% 53.1%',
-      '--primary-foreground':   '60 9.1% 97.8%',
-      '--secondary':            '240 4.8% 95.9%',
-      '--secondary-foreground': '240 5.9% 10%',
-      '--accent':               '24.6 95% 95%',
-      '--accent-foreground':    '24.6 95% 30%',
-      '--ring':                 '24.6 95% 53.1%',
+      '--primary':              'oklch(0.705 0.19 53)',
+      '--primary-foreground':   'oklch(0.2 0.04 53)',
+      '--secondary':            'oklch(0.94 0.04 53)',
+      '--secondary-foreground': 'oklch(0.2 0.05 53)',
+      '--accent':               'oklch(0.94 0.04 53)',
+      '--accent-foreground':    'oklch(0.2 0.05 53)',
+      '--ring':                 'oklch(0.705 0.19 53)',
     },
   },
   violet: {
     label: 'Violet',
     vars: {
-      '--primary':              '263.4 70% 50.4%',
-      '--primary-foreground':   '210 40% 98%',
-      '--secondary':            '240 4.8% 95.9%',
-      '--secondary-foreground': '240 5.9% 10%',
-      '--accent':               '263.4 70% 95%',
-      '--accent-foreground':    '263.4 70% 30%',
-      '--ring':                 '263.4 70% 50.4%',
+      '--primary':              'oklch(0.542 0.222 285)',
+      '--primary-foreground':   'oklch(0.97 0.01 285)',
+      '--secondary':            'oklch(0.93 0.04 285)',
+      '--secondary-foreground': 'oklch(0.2 0.05 285)',
+      '--accent':               'oklch(0.93 0.04 285)',
+      '--accent-foreground':    'oklch(0.2 0.05 285)',
+      '--ring':                 'oklch(0.542 0.222 285)',
     },
   },
 };
 
 /**
  * Border radius presets.
- * tailwind.config.js maps --radius → rounded-lg, rounded-md, rounded-sm
- * via calc(var(--radius) - Npx), so changing this one var reshapes all components.
+ * The @theme inline block derives --radius-sm/md/lg/xl as proportional
+ * multiples of --radius, so changing this one variable reshapes all corners.
+ * Default matches the shadcn/ui base (0.625rem = 10px).
  */
 export const radiusPresets = {
   none:    '0rem',
   xs:      '0.125rem',
   sm:      '0.25rem',
   md:      '0.375rem',
-  default: '0.5rem',
+  default: '0.625rem',
   lg:      '0.75rem',
   xl:      '1rem',
   '2xl':   '1.5rem',
