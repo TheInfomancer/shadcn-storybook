@@ -11,8 +11,8 @@ const monthlyData = [
 ];
 
 const chartConfig = {
-  desktop: { label: 'Desktop', color: 'hsl(var(--primary))' },
-  mobile:  { label: 'Mobile',  color: 'hsl(var(--muted-foreground))' },
+  desktop: { label: 'Desktop', color: 'oklch(58% 0.22 260)' },  // blue
+  mobile:  { label: 'Mobile',  color: 'oklch(68% 0.19 48)' },   // orange
 };
 
 export default {
@@ -81,10 +81,10 @@ export const PieChartStory = {
       { name: 'Edge',    value: 100 },
     ];
     const COLORS = [
-      'hsl(var(--primary))',
-      'hsl(var(--muted-foreground))',
-      'hsl(var(--secondary-foreground))',
-      'hsl(var(--border))',
+      'oklch(58% 0.22 260)',  // blue
+      'oklch(68% 0.19 48)',   // orange
+      'oklch(60% 0.19 145)',  // green
+      'oklch(60% 0.21 15)',   // red
     ];
     return (
       <ChartContainer config={{}} className="h-64 w-64">

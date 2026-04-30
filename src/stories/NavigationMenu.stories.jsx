@@ -11,7 +11,7 @@ const components = [
 
 export default {
   title: 'Organisms/Navigation Menu',
-  parameters: { layout: 'padded' },
+  parameters: { layout: 'centered' },
 };
 
 export const Default = {
